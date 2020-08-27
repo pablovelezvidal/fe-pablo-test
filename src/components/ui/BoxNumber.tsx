@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
-const NumberContainer = styled.div`
+const NumberContainer: any = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -13,6 +13,9 @@ const NumberContainer = styled.div`
   height: 30px;
   background-color: #22ee22;
   border: 2px solid blue;
+  transition: background-color 0.2s ease;
+  background-color: ${(props: { isDragging: boolean }) =>
+    props.isDragging ? "lightgreen" : "white"};
 `;
 
 class BoxNumber extends React.Component<{ num: number }, {}> {
@@ -20,13 +23,14 @@ class BoxNumber extends React.Component<{ num: number }, {}> {
     return (
       <Draggable draggableId={"id-" + this.props.num} index={this.props.num!}>
         {(provided, snapshot) => (
-          <div
+          <NumberContainer
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            isDragging={snapshot.isDragging}
           >
-            <NumberContainer>{this.props.num}</NumberContainer>
-          </div>
+            {this.props.num}
+          </NumberContainer>
         )}
       </Draggable>
     );

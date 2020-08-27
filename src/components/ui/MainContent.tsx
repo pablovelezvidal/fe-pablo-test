@@ -22,12 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 const AllNumbersContainer = styled.div`
   text-align: center;
+  display: flex;
   width: 70%;
   margin: auto;
   min-height: 20%;
   height: auto;
-  background-color: black;
   border: 2px dotted gray;
+
   margin-top: 10%;
 `;
 
