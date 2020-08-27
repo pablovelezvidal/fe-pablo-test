@@ -1,6 +1,6 @@
 import * as React from "react";
 import Container from "@material-ui/core/Container";
-import BoxNumber from "./BoxNumber";
+import BoxNumber from "../ui/BoxNumber";
 import { NumbersConsumer } from "../../NumbersContext";
 
 const BoxContainer: React.SFC = () => {

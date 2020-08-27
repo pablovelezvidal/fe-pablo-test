@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import BoxContainer from "./BoxContainer";
+import BoxContainer from "../containers/BoxContainer";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
