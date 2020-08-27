@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import BoxContainer from "./BoxContainer";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -22,21 +24,19 @@ function MainContent() {
   const classes = useStyles();
 
   return (
-    <main className={classes.fullWidth}>
-      <div className={classes.toolbar} />
-      <div className={classes.title}>
-        <Typography variant="h6">
-          Drag and Drop the Numbers to the Bottom Boxes
-        </Typography>
-      </div>
-      <div className={classes.content}>
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus,
-          nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem
-          felis nec erat
-        </Typography>
-      </div>
-    </main>
+    <Container maxWidth="lg">
+      <main className={classes.fullWidth}>
+        <div className={classes.toolbar} />
+        <div className={classes.title}>
+          <Typography variant="h6">
+            Drag and Drop the Numbers to the Bottom Boxes
+          </Typography>
+        </div>
+        <div className={classes.content}>
+          <BoxContainer></BoxContainer>
+        </div>
+      </main>
+    </Container>
   );
 }
 
