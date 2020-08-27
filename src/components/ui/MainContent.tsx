@@ -1,26 +1,62 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import BoxContainer from "../containers/BoxContainer";
 import { BoxNumbers } from "../../Types";
 import { ctxt } from "../../NumbersContext";
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  fullWidth: {
+  boxesContainer: {
     width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "stretch",
   },
 }));
+
+const AllNumbersContainer = styled.div`
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  min-height: 20%;
+  height: auto;
+  background-color: black;
+  border: 2px dotted gray;
+  margin-top: 10%;
+`;
+
+const EvenNumbersContainer = styled.div`
+  display: flex;
+  align-self: flex-end;
+  width: 40%;
+  min-height: 20%;
+  height: auto;
+  background-color: white;
+  border: 2px dotted green;
+  bottom: 15%;
+  position: fixed;
+  margin: 5px;
+`;
+const OddNumbersContainer = styled.div`
+  display: flex;
+  align-self: flex-end;
+  width: 40%;
+  min-height: 20%;
+  height: auto;
+  right: 0;
+  background-color: white;
+  border: 2px dotted purple;
+  bottom: 15%;
+  position: fixed;
+  margin: 5px;
+`;
 
 const MainContent = () => {
   const classes = useStyles();
@@ -28,21 +64,19 @@ const MainContent = () => {
   const numbersFromContext = React.useContext<BoxNumbers | null>(ctxt);
 
   return (
-    <Container maxWidth="lg">
-      <main className={classes.fullWidth}>
-        <div className={classes.toolbar} />
-        <div className={classes.title}>
-          <Typography variant="h6">
-            Drag and Drop the Numbers to the Bottom Boxes
-          </Typography>
-        </div>
-        <div className={classes.content}>
+    <Grid container justify="center">
+      <Grid item className={classes.boxesContainer}>
+        <AllNumbersContainer>
           <BoxContainer initialNumbers={numbersFromContext}></BoxContainer>
+        </AllNumbersContainer>
+        <EvenNumbersContainer>
           <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
+        </EvenNumbersContainer>
+        <OddNumbersContainer>
           <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
-        </div>
-      </main>
-    </Container>
+        </OddNumbersContainer>
+      </Grid>
+    </Grid>
   );
 };
 

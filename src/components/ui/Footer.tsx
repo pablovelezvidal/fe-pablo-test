@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Footer() {
+const Footer = () => {
   const classes = useStyles();
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -31,6 +31,6 @@ function Footer() {
       </Typography>
     </AppBar>
   );
-}
+};
 
 export default Footer;

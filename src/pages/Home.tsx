@@ -9,6 +9,7 @@ import { BoxNumbers } from "../Types";
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
+    height: "100%",
   },
 }));
 

@@ -8,9 +8,7 @@ const BoxContainer: React.SFC<any> = (props) => {
   );
 
   return (
-    <>
-      <BoxNumbersContainer nums={numbers!.listNumbers}></BoxNumbersContainer>
-    </>
+    <BoxNumbersContainer nums={numbers!.listNumbers}></BoxNumbersContainer>
   );
 };
 

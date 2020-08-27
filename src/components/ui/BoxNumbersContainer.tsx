@@ -3,11 +3,11 @@ import BoxNumber from "../ui/BoxNumber";
 import styled from "styled-components";
 
 const BoxNumberContainer = styled.div`
-  display: inline-block;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
   text-align: center;
-  padding: 3px;
-  width: 300px;
-  height: 300px;
   background-color: #ddd;
   border: 1px solid red;
 `;
