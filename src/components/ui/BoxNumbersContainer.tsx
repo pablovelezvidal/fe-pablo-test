@@ -1,5 +1,6 @@
 import * as React from "react";
 import BoxNumber from "../ui/BoxNumber";
+import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const BoxNumberContainer = styled.div`
@@ -16,11 +17,18 @@ class BoxNumbersContainer extends React.Component<any, any> {
   render() {
     debugger;
     return (
-      <BoxNumberContainer>
-        {this.props.nums.listNumbers.map((number: any, index: number) => (
-          <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
-        ))}
-      </BoxNumberContainer>
+      <Droppable droppableId="dp1">
+        {(provided, snapshot) => (
+          <BoxNumberContainer
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {this.props.nums.listNumbers.map((number: any, index: number) => (
+              <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
+            ))}
+          </BoxNumberContainer>
+        )}
+      </Droppable>
     );
   }
 }

@@ -5,6 +5,7 @@ import BoxContainer from "../containers/BoxContainer";
 import { BoxNumbers } from "../../Types";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
+import BoxNumbersContainer from "./BoxNumbersContainer";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -80,7 +81,7 @@ const MainContent = (props: any) => {
       <Grid container justify="center">
         <Grid item className={classes.boxesContainer}>
           <AllNumbersContainer>
-            <BoxContainer nums={props.nums}></BoxContainer>
+            <BoxNumbersContainer nums={props.nums}></BoxNumbersContainer>
           </AllNumbersContainer>
           {/* <EvenNumbersContainer>
             <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
