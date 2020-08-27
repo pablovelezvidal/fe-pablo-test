@@ -21,7 +21,7 @@ const NumberContainer: any = styled.div`
 class BoxNumber extends React.Component<{ num: number }, {}> {
   render() {
     return (
-      <Draggable draggableId={"id-" + this.props.num} index={this.props.num!}>
+      <Draggable draggableId={"" + this.props.num} index={this.props.num!}>
         {(provided, snapshot) => (
           <NumberContainer
             ref={provided.innerRef}

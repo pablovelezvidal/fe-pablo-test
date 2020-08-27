@@ -25,7 +25,7 @@ class BoxNumbersContainer extends React.Component<any, any> {
               ref={provided.innerRef}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              {this.props.nums.listNumbers.map((number: any, index: number) => (
+              {this.props.nums.map((number: any, index: number) => (
                 <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
               ))}
               {provided.placeholder}

@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import { BoxNumbers } from "../../Types";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import BoxNumbersContainer from "./BoxNumbersContainer";
@@ -28,7 +27,6 @@ const AllNumbersContainer = styled.div`
   min-height: 20%;
   height: auto;
   border: 2px dotted gray;
-
   margin-top: 10%;
 `;
 
@@ -58,22 +56,44 @@ const OddNumbersContainer = styled.div`
   margin: 5px;
 `;
 
+interface myState {
+  allNums: number[];
+  oddNums: number[];
+  evenNums: number[];
+}
+
 const MainContent = (props: any) => {
   const classes = useStyles();
 
+  const [boxesData, setBoxesData] = React.useState<myState>({
+    allNums: [11, 10, 9, 1, 2, 3, 4, 5, 6, 7, 8],
+    oddNums: [],
+    evenNums: [],
+  });
+
   const onDragEndFn = (result: any) => {
+    console.log(result);
     const { destination, source, reason } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
 
-    if (
-      destination.droppableId === source.doppableId &&
-      destination.index === source.index
-    ) {
-      return;
+    const newState = { ...boxesData };
+
+    if (destination.droppableId === "all-dp") {
+      newState.allNums.push(source.index);
+    } else if (destination.droppableId === "even-dp") {
+      newState.allNums = newState.allNums.filter((num) => num !== source.index);
+      newState.oddNums = newState.oddNums.filter((num) => num !== source.index);
+      newState.evenNums.push(source.index);
+    } else if (destination.droppableId === "odd-dp") {
+      newState.oddNums.push(source.index);
+      newState.allNums = newState.allNums.filter((num) => num !== source.index);
+      newState.evenNums = newState.evenNums.filter(
+        (num) => num !== source.index
+      );
     }
-    console.log("end of dragging");
+    setBoxesData(newState);
   };
 
   return (
@@ -82,20 +102,20 @@ const MainContent = (props: any) => {
         <Grid item className={classes.boxesContainer}>
           <AllNumbersContainer>
             <BoxNumbersContainer
-              nums={props.nums}
-              id="dp1"
+              nums={boxesData.allNums}
+              id="all-dp"
             ></BoxNumbersContainer>
           </AllNumbersContainer>
           <EvenNumbersContainer>
             <BoxNumbersContainer
-              nums={{ listNumbers: [] }}
-              id="dp2"
+              nums={boxesData.evenNums}
+              id="even-dp"
             ></BoxNumbersContainer>
           </EvenNumbersContainer>
           <OddNumbersContainer>
             <BoxNumbersContainer
-              nums={{ listNumbers: [] }}
-              id="dp3"
+              nums={boxesData.oddNums}
+              id="odd-dp"
             ></BoxNumbersContainer>
           </OddNumbersContainer>
         </Grid>
