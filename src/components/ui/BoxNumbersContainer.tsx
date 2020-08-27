@@ -15,20 +15,22 @@ const BoxNumberContainer = styled.div`
 
 class BoxNumbersContainer extends React.Component<any, any> {
   render() {
-    debugger;
     return (
-      <Droppable droppableId="dp1">
-        {(provided, snapshot) => (
-          <BoxNumberContainer
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {this.props.nums.listNumbers.map((number: any, index: number) => (
-              <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
-            ))}
-          </BoxNumberContainer>
-        )}
-      </Droppable>
+      <>
+        <Droppable droppableId={this.props.id}>
+          {(provided) => (
+            <BoxNumberContainer
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {this.props.nums.listNumbers.map((number: any, index: number) => (
+                <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
+              ))}
+              {provided.placeholder}
+            </BoxNumberContainer>
+          )}
+        </Droppable>
+      </>
     );
   }
 }

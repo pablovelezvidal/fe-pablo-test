@@ -17,29 +17,19 @@ const NumberContainer = styled.div`
 
 class BoxNumber extends React.Component<{ num: number }, {}> {
   render() {
-    let Comp = <p>No comp</p>;
-    if (this.props && this.props.num) {
-      Comp = (
-        <div>
-          <Draggable
-            draggableId={"id-" + this.props.num!}
-            key={"key-" + Math.random() * 100}
-            index={this.props.num!}
+    return (
+      <Draggable draggableId={"id-" + this.props.num} index={this.props.num!}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
           >
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              >
-                <NumberContainer>{this.props.num}</NumberContainer>
-              </div>
-            )}
-          </Draggable>
-        </div>
-      );
-    }
-    return Comp;
+            <NumberContainer>{this.props.num}</NumberContainer>
+          </div>
+        )}
+      </Draggable>
+    );
   }
 }
 

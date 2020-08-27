@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import BoxContainer from "../containers/BoxContainer";
 import { BoxNumbers } from "../../Types";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -81,14 +80,23 @@ const MainContent = (props: any) => {
       <Grid container justify="center">
         <Grid item className={classes.boxesContainer}>
           <AllNumbersContainer>
-            <BoxNumbersContainer nums={props.nums}></BoxNumbersContainer>
+            <BoxNumbersContainer
+              nums={props.nums}
+              id="dp1"
+            ></BoxNumbersContainer>
           </AllNumbersContainer>
-          {/* <EvenNumbersContainer>
-            <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
+          <EvenNumbersContainer>
+            <BoxNumbersContainer
+              nums={{ listNumbers: [] }}
+              id="dp2"
+            ></BoxNumbersContainer>
           </EvenNumbersContainer>
           <OddNumbersContainer>
-            <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
-          </OddNumbersContainer> */}
+            <BoxNumbersContainer
+              nums={{ listNumbers: [] }}
+              id="dp3"
+            ></BoxNumbersContainer>
+          </OddNumbersContainer>
         </Grid>
       </Grid>
     </DragDropContext>
