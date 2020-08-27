@@ -1,5 +1,4 @@
 import React from "react";
-import styled, { createGlobalStyle, css } from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
