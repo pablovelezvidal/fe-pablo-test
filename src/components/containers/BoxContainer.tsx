@@ -1,18 +1,16 @@
 import * as React from "react";
-import { NumbersConsumer } from "../../NumbersContext";
+import { BoxNumbers } from "../../Types";
 import BoxNumbersContainer from "../ui/BoxNumbersContainer";
 
-const BoxContainer: React.SFC = () => {
+const BoxContainer: React.SFC<any> = (props) => {
+  const [numbers, setNumbers] = React.useState<BoxNumbers | null>(
+    props.initialNumbers
+  );
+
   return (
-    <NumbersConsumer>
-      {(appContext) =>
-        appContext && (
-          <BoxNumbersContainer
-            numbers={appContext.listNumbers}
-          ></BoxNumbersContainer>
-        )
-      }
-    </NumbersConsumer>
+    <>
+      <BoxNumbersContainer nums={numbers!.listNumbers}></BoxNumbersContainer>
+    </>
   );
 };
 

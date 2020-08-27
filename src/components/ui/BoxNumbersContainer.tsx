@@ -15,7 +15,7 @@ const BoxNumberContainer = styled.div`
 const BoxNumbersContainer: React.SFC<any> = (props: any = []) => {
   return (
     <BoxNumberContainer>
-      {props.numbers.map((number: any, index: number) => (
+      {props.nums.map((number: any, index: number) => (
         <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
       ))}
     </BoxNumberContainer>

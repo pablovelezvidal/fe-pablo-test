@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import BoxContainer from "../containers/BoxContainer";
+import { BoxNumbers } from "../../Types";
+import { ctxt } from "../../NumbersContext";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -20,8 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MainContent() {
+const MainContent = () => {
   const classes = useStyles();
+
+  const numbersFromContext = React.useContext<BoxNumbers | null>(ctxt);
 
   return (
     <Container maxWidth="lg">
@@ -33,13 +37,13 @@ function MainContent() {
           </Typography>
         </div>
         <div className={classes.content}>
-          <BoxContainer></BoxContainer>
-          <BoxContainer></BoxContainer>
-          <BoxContainer></BoxContainer>
+          <BoxContainer initialNumbers={numbersFromContext}></BoxContainer>
+          <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
+          <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
         </div>
       </main>
     </Container>
   );
-}
+};
 
 export default MainContent;

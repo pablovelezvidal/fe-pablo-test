@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TopMenu from "../components/ui/TopMenu";
 import Footer from "../components/ui/Footer";
 import MainContent from "../components/ui/MainContent";
-import { NumbersProvider } from "../NumbersContext";
+import { ctxt } from "../NumbersContext";
 import { BoxNumbers } from "../Types";
 
 const useStyles = makeStyles(() => ({
@@ -15,18 +15,19 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
   const classes = useStyles();
 
-  const stateNumbers: BoxNumbers = { listNumbers: [1, 2, 3, 4, 5, 6, 7, 8] };
-
+  const stateNumbers: BoxNumbers = {
+    listNumbers: [11, 10, 9, 1, 2, 3, 4, 5, 6, 7, 8],
+  };
   const [numbers, setNumbers] = useState<BoxNumbers>(stateNumbers);
 
   return (
-    <NumbersProvider value={numbers}>
+    <ctxt.Provider value={numbers}>
       <div className={classes.root}>
         <TopMenu />
         <MainContent />
         <Footer />
       </div>
-    </NumbersProvider>
+    </ctxt.Provider>
   );
 };
 
