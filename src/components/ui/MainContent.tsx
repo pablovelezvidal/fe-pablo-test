@@ -34,6 +34,8 @@ function MainContent() {
         </div>
         <div className={classes.content}>
           <BoxContainer></BoxContainer>
+          <BoxContainer></BoxContainer>
+          <BoxContainer></BoxContainer>
         </div>
       </main>
     </Container>
