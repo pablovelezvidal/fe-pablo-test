@@ -12,14 +12,17 @@ const BoxNumberContainer = styled.div`
   border: 1px solid red;
 `;
 
-const BoxNumbersContainer: React.SFC<any> = (props: any = []) => {
-  return (
-    <BoxNumberContainer>
-      {props.nums.map((number: any, index: number) => (
-        <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
-      ))}
-    </BoxNumberContainer>
-  );
-};
+class BoxNumbersContainer extends React.Component<any, any> {
+  render() {
+    debugger;
+    return (
+      <BoxNumberContainer>
+        {this.props.nums.listNumbers.map((number: any, index: number) => (
+          <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
+        ))}
+      </BoxNumberContainer>
+    );
+  }
+}
 
 export default BoxNumbersContainer;

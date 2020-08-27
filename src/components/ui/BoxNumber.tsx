@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Draggable } from "react-beautiful-dnd";
 
 const NumberContainer = styled.div`
   display: inline-flex;
@@ -14,8 +15,32 @@ const NumberContainer = styled.div`
   border: 2px solid blue;
 `;
 
-const BoxNumber: React.SFC<any> = (props: { num: number }) => {
-  return <NumberContainer>{props.num}</NumberContainer>;
-};
+class BoxNumber extends React.Component<{ num: number }, {}> {
+  render() {
+    let Comp = <p>No comp</p>;
+    if (this.props && this.props.num) {
+      Comp = (
+        <div>
+          <Draggable
+            draggableId={"id-" + this.props.num!}
+            key={"key-" + Math.random() * 100}
+            index={this.props.num!}
+          >
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              >
+                <NumberContainer>{this.props.num}</NumberContainer>
+              </div>
+            )}
+          </Draggable>
+        </div>
+      );
+    }
+    return Comp;
+  }
+}
 
 export default BoxNumber;

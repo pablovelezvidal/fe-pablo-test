@@ -1,11 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
+import { Grid } from "@material-ui/core";
 import BoxContainer from "../containers/BoxContainer";
 import { BoxNumbers } from "../../Types";
-import { ctxt } from "../../NumbersContext";
 import styled from "styled-components";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -58,25 +57,40 @@ const OddNumbersContainer = styled.div`
   margin: 5px;
 `;
 
-const MainContent = () => {
+const MainContent = (props: any) => {
   const classes = useStyles();
 
-  const numbersFromContext = React.useContext<BoxNumbers | null>(ctxt);
+  const onDragEndFn = (result: any) => {
+    const { destination, source, reason } = result;
+    if (!destination || reason === "CANCEL") {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.doppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    console.log("end of dragging");
+  };
 
   return (
-    <Grid container justify="center">
-      <Grid item className={classes.boxesContainer}>
-        <AllNumbersContainer>
-          <BoxContainer initialNumbers={numbersFromContext}></BoxContainer>
-        </AllNumbersContainer>
-        <EvenNumbersContainer>
-          <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
-        </EvenNumbersContainer>
-        <OddNumbersContainer>
-          <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
-        </OddNumbersContainer>
+    <DragDropContext onDragEnd={onDragEndFn}>
+      <Grid container justify="center">
+        <Grid item className={classes.boxesContainer}>
+          <AllNumbersContainer>
+            <BoxContainer nums={props.nums}></BoxContainer>
+          </AllNumbersContainer>
+          {/* <EvenNumbersContainer>
+            <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
+          </EvenNumbersContainer>
+          <OddNumbersContainer>
+            <BoxContainer initialNumbers={{ listNumbers: [] }}></BoxContainer>
+          </OddNumbersContainer> */}
+        </Grid>
       </Grid>
-    </Grid>
+    </DragDropContext>
   );
 };
 
