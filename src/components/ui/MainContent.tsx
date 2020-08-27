@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import BoxNumbersContainer from "./BoxNumbers";
 import { connect } from "react-redux";
+import { addAll, addEven, addOdd } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -62,22 +63,18 @@ interface myState {
 const MainContent = (props: any) => {
   const classes = useStyles();
 
-  const [boxesData, setBoxesData] = React.useState<myState>({
-    allNums: [11, 10, 9, 1, 2, 3, 4, 5, 6, 7, 8],
-    oddNums: [],
-    evenNums: [],
-  });
-
   const onDragEndFn = (result: any) => {
-    console.log(result);
     const { destination, source, reason } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
 
     if (destination.droppableId === "all-dp") {
+      props.onAddAll(source.index);
     } else if (destination.droppableId === "even-dp") {
+      props.onAddEven(source.index);
     } else if (destination.droppableId === "odd-dp") {
+      props.onAddOdd(source.index);
     }
   };
 
@@ -116,19 +113,15 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  //   onNewDay({ resort, date, powder, backcountry }) {
-  //     dispatch(addDay(resort, date, powder, backcountry));
-  //   },
-  //   onChange(value) {
-  //     if (value) {
-  //       dispatch(suggestResortNames(value));
-  //     } else {
-  //       dispatch(clearSuggestions());
-  //     }
-  //   },
-  //   onClear() {
-  //     dispatch(clearSuggestions());
-  //   },
+  onAddAll(num: number) {
+    dispatch(addAll(num));
+  },
+  onAddEven(num: number) {
+    dispatch(addEven(num));
+  },
+  onAddOdd(num: number) {
+    dispatch(addOdd(num));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
