@@ -1,9 +1,9 @@
 import * as React from "react";
-import BoxNumber from "../ui/BoxNumber";
+import BoxNumber from "./BoxNumber";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-const BoxNumberContainer = styled.div`
+const BoxNumberDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: auto;
@@ -14,13 +14,13 @@ const BoxNumberContainer = styled.div`
     props.isDraggingOver ? "skyblue" : "white"};
 `;
 
-class BoxNumbersContainer extends React.Component<any, any> {
+class BoxNumbers extends React.Component<any, any> {
   render() {
     return (
       <>
         <Droppable droppableId={this.props.id}>
           {(provided, snapshot) => (
-            <BoxNumberContainer
+            <BoxNumberDiv
               {...provided.droppableProps}
               ref={provided.innerRef}
               isDraggingOver={snapshot.isDraggingOver}
@@ -29,7 +29,7 @@ class BoxNumbersContainer extends React.Component<any, any> {
                 <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
               ))}
               {provided.placeholder}
-            </BoxNumberContainer>
+            </BoxNumberDiv>
           )}
         </Droppable>
       </>
@@ -37,4 +37,4 @@ class BoxNumbersContainer extends React.Component<any, any> {
   }
 }
 
-export default BoxNumbersContainer;
+export default BoxNumbers;

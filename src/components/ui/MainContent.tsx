@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
-import BoxNumbersContainer from "./BoxNumbersContainer";
+import BoxNumbersContainer from "./BoxNumbers";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -19,38 +19,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AllNumbersContainer = styled.div`
-  text-align: center;
+const NumbersDiv = styled.div`
   display: flex;
-  width: 70%;
-  margin: auto;
   min-height: 20%;
   height: auto;
-  border: 2px dotted gray;
+  border: 2px dotted;
+  background-color: white;
+`;
+
+const AllNumbersDiv = styled(NumbersDiv)`
+  width: 70%;
+  margin: auto;
+  border-color: gray;
   margin-top: 10%;
 `;
 
-const EvenNumbersContainer = styled.div`
-  display: flex;
+const EvenNumbersDiv = styled(NumbersDiv)`
   align-self: flex-end;
   width: 40%;
-  min-height: 20%;
-  height: auto;
-  background-color: white;
-  border: 2px dotted green;
+  border-color: green;
   bottom: 15%;
   position: fixed;
   margin: 5px;
 `;
-const OddNumbersContainer = styled.div`
-  display: flex;
+const OddNumbersDiv = styled(NumbersDiv)`
   align-self: flex-end;
   width: 40%;
-  min-height: 20%;
-  height: auto;
   right: 0;
-  background-color: white;
-  border: 2px dotted purple;
+  border-color: purple;
   bottom: 15%;
   position: fixed;
   margin: 5px;
@@ -62,7 +58,7 @@ interface myState {
   evenNums: number[];
 }
 
-const MainContent = (props: any) => {
+const MainContent = () => {
   const classes = useStyles();
 
   const [boxesData, setBoxesData] = React.useState<myState>({
@@ -100,24 +96,24 @@ const MainContent = (props: any) => {
     <DragDropContext onDragEnd={onDragEndFn}>
       <Grid container justify="center">
         <Grid item className={classes.boxesContainer}>
-          <AllNumbersContainer>
+          <AllNumbersDiv>
             <BoxNumbersContainer
               nums={boxesData.allNums}
               id="all-dp"
             ></BoxNumbersContainer>
-          </AllNumbersContainer>
-          <EvenNumbersContainer>
+          </AllNumbersDiv>
+          <EvenNumbersDiv>
             <BoxNumbersContainer
               nums={boxesData.evenNums}
               id="even-dp"
             ></BoxNumbersContainer>
-          </EvenNumbersContainer>
-          <OddNumbersContainer>
+          </EvenNumbersDiv>
+          <OddNumbersDiv>
             <BoxNumbersContainer
               nums={boxesData.oddNums}
               id="odd-dp"
             ></BoxNumbersContainer>
-          </OddNumbersContainer>
+          </OddNumbersDiv>
         </Grid>
       </Grid>
     </DragDropContext>
