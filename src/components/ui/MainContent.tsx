@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import BoxNumbersContainer from "./BoxNumbers";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -58,7 +59,7 @@ interface myState {
   evenNums: number[];
 }
 
-const MainContent = () => {
+const MainContent = (props: any) => {
   const classes = useStyles();
 
   const [boxesData, setBoxesData] = React.useState<myState>({
@@ -74,22 +75,10 @@ const MainContent = () => {
       return;
     }
 
-    const newState = { ...boxesData };
-
     if (destination.droppableId === "all-dp") {
-      newState.allNums.push(source.index);
     } else if (destination.droppableId === "even-dp") {
-      newState.allNums = newState.allNums.filter((num) => num !== source.index);
-      newState.oddNums = newState.oddNums.filter((num) => num !== source.index);
-      newState.evenNums.push(source.index);
     } else if (destination.droppableId === "odd-dp") {
-      newState.oddNums.push(source.index);
-      newState.allNums = newState.allNums.filter((num) => num !== source.index);
-      newState.evenNums = newState.evenNums.filter(
-        (num) => num !== source.index
-      );
     }
-    setBoxesData(newState);
   };
 
   return (
@@ -98,19 +87,19 @@ const MainContent = () => {
         <Grid item className={classes.boxesContainer}>
           <AllNumbersDiv>
             <BoxNumbersContainer
-              nums={boxesData.allNums}
+              nums={props.allNums}
               id="all-dp"
             ></BoxNumbersContainer>
           </AllNumbersDiv>
           <EvenNumbersDiv>
             <BoxNumbersContainer
-              nums={boxesData.evenNums}
+              nums={props.evenNums}
               id="even-dp"
             ></BoxNumbersContainer>
           </EvenNumbersDiv>
           <OddNumbersDiv>
             <BoxNumbersContainer
-              nums={boxesData.oddNums}
+              nums={props.oddNums}
               id="odd-dp"
             ></BoxNumbersContainer>
           </OddNumbersDiv>
@@ -120,4 +109,26 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+const mapStateToProps = (state: any) => ({
+  allNums: state.allNums,
+  evenNums: state.evenNums,
+  oddNums: state.oddNums,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  //   onNewDay({ resort, date, powder, backcountry }) {
+  //     dispatch(addDay(resort, date, powder, backcountry));
+  //   },
+  //   onChange(value) {
+  //     if (value) {
+  //       dispatch(suggestResortNames(value));
+  //     } else {
+  //       dispatch(clearSuggestions());
+  //     }
+  //   },
+  //   onClear() {
+  //     dispatch(clearSuggestions());
+  //   },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

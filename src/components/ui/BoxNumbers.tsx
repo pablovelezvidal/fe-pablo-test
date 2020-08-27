@@ -4,8 +4,9 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const BoxNumberDiv = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+  display: inline-block;
+  justify-content: space-around;
+  flex-wrap: wrap;
   width: auto;
   margin: auto;
   background-color: #ddd;
