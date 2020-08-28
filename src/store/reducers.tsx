@@ -59,6 +59,11 @@ export const allNumbersReducer = (state: any, action: Action) => {
       };
       return newState;
 
+    case C.RECEIVE_API_DATA:
+      debugger;
+      newState.allNums = action.payload.data;
+      return newState;
+
     default:
       return state;
   }

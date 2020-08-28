@@ -1,5 +1,8 @@
 import { allNumbersReducer } from "./reducers";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+
+export const sagaMiddleware = createSagaMiddleware();
 
 const consoleMessages = (store: any) => (next: any) => (action: any) => {
   let result;
@@ -21,7 +24,7 @@ const consoleMessages = (store: any) => (next: any) => (action: any) => {
 };
 
 export default (initialState = {}) => {
-  return applyMiddleware(consoleMessages)(createStore)(
+  return applyMiddleware(consoleMessages, sagaMiddleware)(createStore)(
     allNumbersReducer,
     initialState
   );

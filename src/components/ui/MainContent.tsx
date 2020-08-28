@@ -12,6 +12,7 @@ import {
   setFeedbackEven,
   setFeedbackOdd,
   removeFeedback,
+  requestApiData,
 } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +74,10 @@ interface myState {
 
 const MainContent = (props: any) => {
   const classes = useStyles();
+
+  React.useEffect(() => {
+    props.onRequestApiData();
+  }, []);
 
   const onDragStartFn = (result: any) => {
     document.body.style.color = "orange";
@@ -174,6 +179,9 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
   onRemoveFeedback() {
     dispatch(removeFeedback());
+  },
+  onRequestApiData() {
+    dispatch(requestApiData());
   },
 });
 

@@ -2,7 +2,7 @@ import C from "./constants";
 
 export interface Action {
   type: string;
-  payload: { num: number };
+  payload: any;
 }
 
 export function addAll<Action>(num: number) {
@@ -43,3 +43,16 @@ export function removeFeedback<Action>() {
     type: C.REMOVE_FEEDBACK,
   };
 }
+
+export const requestApiData = () => {
+  return {
+    type: C.REQUEST_API_DATA,
+  };
+};
+
+export const receiveApiData = (data: any) => {
+  return {
+    type: C.RECEIVE_API_DATA,
+    payload: { data },
+  };
+};
