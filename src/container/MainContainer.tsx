@@ -1,11 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+
+import Grid from "@material-ui/core/Grid";
+
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
-import BoxNumbersContainer from "./BoxNumbers";
-import { connect } from "react-redux";
-import Typography from "@material-ui/core/Typography";
 
 import {
   addAll,
@@ -15,76 +14,43 @@ import {
   setFeedbackOdd,
   removeFeedback,
   requestApiData,
-} from "../../actions";
+} from "../actions";
+import BoxNumbersContainer from "../components/ui/BoxNumbers";
+import { myState } from "../store/index";
 
-const useStyles = makeStyles((theme) => ({
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  boxesContainer: {
-    width: "100%",
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "stretch",
-  },
-}));
-
-const NumbersDiv = styled.div`
-  display: flex;
-  min-height: 20%;
-  height: auto;
-  border: 2px dotted;
+const NumbersDiv = styled(Grid)`
   background-color: white;
+  z-index: 10;
 `;
 
-const WaterMarkInfo = styled.h2`
-  left: 10%;
-  top: 10%;
+const WaterMarkInfo = styled.div`
   color: #ddd;
-  opacity: 0.7;
-  z-index: -10;
+  opacity: 0.6;
   position: absolute;
+  bottom: 0;
+  margin: 1%;
+  z-index: 0;
 `;
 
 const AllNumbersDiv = styled(NumbersDiv)`
-  width: 70%;
+  width: 60%;
   margin: auto;
-  border-color: gray;
-  margin-top: 10%;
 `;
 
-const EvenNumbersDiv = styled(NumbersDiv)`
-  align-self: flex-end;
-  width: 40%;
-  border-color: green;
-  bottom: 15%;
-  position: fixed;
-  margin: 5px;
-  background-color: ${(props: { isEven: boolean }) =>
-    props.isEven ? "red" : "white"};
+const EvenNumbersDiv = styled.div`
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
+  width: 45%;
 `;
-const OddNumbersDiv = styled(NumbersDiv)`
-  align-self: flex-end;
-  width: 40%;
-  right: 0;
-  border-color: purple;
-  bottom: 15%;
-  position: fixed;
-  margin: 5px;
-  background-color: ${(props: { isOdd: boolean }) =>
-    props.isOdd ? "red" : "white"};
+const OddNumbersDiv = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 2%;
+  width: 45%;
 `;
 
-interface myState {
-  allNums: number[];
-  oddNums: number[];
-  evenNums: number[];
-}
-
-const MainContent = (props: any) => {
-  const classes = useStyles();
+const MainContainer = (props: any) => {
   const { onRequestApiData } = props;
 
   React.useEffect(() => {
@@ -137,29 +103,31 @@ const MainContent = (props: any) => {
       onDragStart={onDragStartFn}
       onDragUpdate={onDragUpdateFn}
     >
-      <Grid container justify="center">
-        <Grid item className={classes.boxesContainer}>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
           <AllNumbersDiv>
             <BoxNumbersContainer
               nums={props.allNums}
               id="all-dp"
             ></BoxNumbersContainer>
           </AllNumbersDiv>
-          <EvenNumbersDiv isEven={props.isEvenVal}>
-            <WaterMarkInfo>Drop Even Numbers Here</WaterMarkInfo>
-            <BoxNumbersContainer
-              nums={props.evenNums}
-              id="even-dp"
-            ></BoxNumbersContainer>
-          </EvenNumbersDiv>
-          <OddNumbersDiv isOdd={props.isOddVal}>
-            <WaterMarkInfo>Drop Odd Numbers Here</WaterMarkInfo>
-            <BoxNumbersContainer
-              nums={props.oddNums}
-              id="odd-dp"
-            ></BoxNumbersContainer>
-          </OddNumbersDiv>
         </Grid>
+        <EvenNumbersDiv>
+          <WaterMarkInfo>Drop Even Here</WaterMarkInfo>
+          <BoxNumbersContainer
+            nums={props.evenNums}
+            id="even-dp"
+            isEven={props.isEvenVal}
+          ></BoxNumbersContainer>
+        </EvenNumbersDiv>
+        <OddNumbersDiv>
+          <WaterMarkInfo>Drop Odd Here</WaterMarkInfo>
+          <BoxNumbersContainer
+            nums={props.oddNums}
+            id="odd-dp"
+            isOdd={props.isOddVal}
+          ></BoxNumbersContainer>
+        </OddNumbersDiv>
       </Grid>
     </DragDropContext>
   );
@@ -167,7 +135,7 @@ const MainContent = (props: any) => {
 
 const isOdd = (num: number) => num % 2 === 0;
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: myState) => ({
   allNums: state.allNums,
   evenNums: state.evenNums,
   oddNums: state.oddNums,
@@ -199,4 +167,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

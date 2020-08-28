@@ -5,18 +5,31 @@ import styled from "styled-components";
 import MyErrorBoundary from "./MyErrorBoundary";
 
 const BoxNumberDiv = styled.div`
-  display: inline-block;
-  justify-content: space-around;
+  display: inline-flex;
   flex-wrap: wrap;
-  width: auto;
+  justify-content: space-evenly;
+  width: 99%;
+  height: auto;
+  min-height: 100px;
   margin: auto;
-  background-color: #ddd;
   transition: background-color 0.2s ease;
-  background-color: ${(props: { isDraggingOver: boolean }) =>
-    props.isDraggingOver ? "skyblue" : "white"};
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  background-color: ${(props: {
+    isDraggingOver: boolean;
+    id: string;
+    isEven: boolean;
+    isOdd: boolean;
+  }) =>
+    (props.id === "odd-dp" && props.isOdd) ||
+    (props.id === "even-dp" && props.isEven)
+      ? "#E56B6F"
+      : props.isDraggingOver
+      ? "skyblue"
+      : "white"};
 `;
 
-class BoxNumbers extends React.Component<any, any> {
+class BoxNumbers extends React.PureComponent<any, any> {
   render() {
     return (
       <>
@@ -27,6 +40,9 @@ class BoxNumbers extends React.Component<any, any> {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 isDraggingOver={snapshot.isDraggingOver}
+                id={this.props.id}
+                isEven={this.props.isEven}
+                isOdd={this.props.isOdd}
               >
                 {this.props.nums.map((number: any, index: number) => (
                   <BoxNumber

@@ -18,7 +18,10 @@ const NumberContainer: any = styled.div`
     props.isDragging ? "lightgreen" : "white"};
 `;
 
-class BoxNumber extends React.Component<{ num: number; index: number }, {}> {
+class BoxNumber extends React.PureComponent<
+  { num: number; index: number },
+  {}
+> {
   render() {
     return (
       <Draggable draggableId={"" + this.props.num} index={this.props.index}>
