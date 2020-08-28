@@ -69,6 +69,10 @@ const MainContent = (props: any) => {
       return;
     }
 
+    if (destination.droppableId === source.droppableId) {
+      return;
+    }
+
     if (destination.droppableId === "all-dp") {
       props.onAddAll(source.index);
     } else if (destination.droppableId === "even-dp") {
