@@ -2,6 +2,7 @@ import * as React from "react";
 import BoxNumber from "./BoxNumber";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import MyErrorBoundary from "./MyErrorBoundary";
 
 const BoxNumberDiv = styled.div`
   display: inline-block;
@@ -19,24 +20,26 @@ class BoxNumbers extends React.Component<any, any> {
   render() {
     return (
       <>
-        <Droppable droppableId={this.props.id}>
-          {(provided, snapshot) => (
-            <BoxNumberDiv
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              isDraggingOver={snapshot.isDraggingOver}
-            >
-              {this.props.nums.map((number: any, index: number) => (
-                <BoxNumber
-                  key={index + "-" + number}
-                  num={number}
-                  index={index}
-                ></BoxNumber>
-              ))}
-              {provided.placeholder}
-            </BoxNumberDiv>
-          )}
-        </Droppable>
+        <MyErrorBoundary>
+          <Droppable droppableId={this.props.id}>
+            {(provided, snapshot) => (
+              <BoxNumberDiv
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
+                {this.props.nums.map((number: any, index: number) => (
+                  <BoxNumber
+                    key={index + "-" + number}
+                    num={number}
+                    index={index}
+                  ></BoxNumber>
+                ))}
+                {provided.placeholder}
+              </BoxNumberDiv>
+            )}
+          </Droppable>
+        </MyErrorBoundary>
       </>
     );
   }
