@@ -74,12 +74,13 @@ interface myState {
 
 const MainContent = (props: any) => {
   const classes = useStyles();
+  const { onRequestApiData } = props;
 
   React.useEffect(() => {
-    props.onRequestApiData();
-  }, []);
+    onRequestApiData();
+  }, [onRequestApiData]);
 
-  const onDragStartFn = (result: any) => {
+  const onDragStartFn = () => {
     document.body.style.color = "orange";
   };
 

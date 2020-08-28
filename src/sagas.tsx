@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { receiveApiData } from "./actions";
 import C from "./constants";
 import { fetchData } from "./api";
