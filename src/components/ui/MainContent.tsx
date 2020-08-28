@@ -5,7 +5,14 @@ import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import BoxNumbersContainer from "./BoxNumbers";
 import { connect } from "react-redux";
-import { addAll, addEven, addOdd } from "../../actions";
+import {
+  addAll,
+  addEven,
+  addOdd,
+  setFeedbackEven,
+  setFeedbackOdd,
+  removeFeedback,
+} from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -43,6 +50,8 @@ const EvenNumbersDiv = styled(NumbersDiv)`
   bottom: 15%;
   position: fixed;
   margin: 5px;
+  background-color: ${(props: { isEven: boolean }) =>
+    props.isEven ? "red" : "white"};
 `;
 const OddNumbersDiv = styled(NumbersDiv)`
   align-self: flex-end;
@@ -52,6 +61,8 @@ const OddNumbersDiv = styled(NumbersDiv)`
   bottom: 15%;
   position: fixed;
   margin: 5px;
+  background-color: ${(props: { isOdd: boolean }) =>
+    props.isOdd ? "red" : "white"};
 `;
 
 interface myState {
@@ -68,14 +79,20 @@ const MainContent = (props: any) => {
   };
 
   const onDragUpdateFn = (result: any) => {
-    console.log(result);
-    const { draggableId } = result;
+    const { destination, draggableId } = result;
 
-    console.log("is odd: ", isOdd(draggableId));
+    if (destination) {
+      if (destination.droppableId === "odd-dp" && !isOdd(draggableId)) {
+        props.onAddFeedbackOdd();
+      } else if (destination.droppableId === "even-dp" && isOdd(draggableId)) {
+        props.onAddFeedbackEven();
+      }
+    }
   };
 
   const onDragEndFn = (result: any) => {
     document.body.style.color = "inherit";
+    props.onRemoveFeedback();
 
     const { destination, source, reason, draggableId } = result;
     if (!destination || reason === "CANCEL") {
@@ -111,13 +128,13 @@ const MainContent = (props: any) => {
               id="all-dp"
             ></BoxNumbersContainer>
           </AllNumbersDiv>
-          <EvenNumbersDiv>
+          <EvenNumbersDiv isEven={props.isEvenVal}>
             <BoxNumbersContainer
               nums={props.evenNums}
               id="even-dp"
             ></BoxNumbersContainer>
           </EvenNumbersDiv>
-          <OddNumbersDiv>
+          <OddNumbersDiv isOdd={props.isOddVal}>
             <BoxNumbersContainer
               nums={props.oddNums}
               id="odd-dp"
@@ -135,6 +152,8 @@ const mapStateToProps = (state: any) => ({
   allNums: state.allNums,
   evenNums: state.evenNums,
   oddNums: state.oddNums,
+  isOddVal: state.feedback.isOddVal,
+  isEvenVal: state.feedback.isEvenVal,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
@@ -146,6 +165,15 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
   onAddOdd(num: number) {
     dispatch(addOdd(num));
+  },
+  onAddFeedbackOdd() {
+    dispatch(setFeedbackOdd());
+  },
+  onAddFeedbackEven() {
+    dispatch(setFeedbackEven());
+  },
+  onRemoveFeedback() {
+    dispatch(removeFeedback());
   },
 });
 

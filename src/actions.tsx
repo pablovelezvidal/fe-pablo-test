@@ -25,3 +25,21 @@ export function addOdd<Action>(num: number) {
     payload: { num },
   };
 }
+
+export function setFeedbackOdd<Action>() {
+  return {
+    type: C.SET_FEEDBACK_ODD,
+  };
+}
+
+export function setFeedbackEven<Action>() {
+  return {
+    type: C.SET_FEEDBACK_EVEN,
+  };
+}
+
+export function removeFeedback<Action>() {
+  return {
+    type: C.REMOVE_FEEDBACK,
+  };
+}

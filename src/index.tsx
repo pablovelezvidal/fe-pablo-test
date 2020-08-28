@@ -32,6 +32,10 @@ const initialState = localStorage["redux-store"]
       ],
       oddNums: [],
       evenNums: [],
+      feedback: {
+        isOddVal: false,
+        isEvenVal: false,
+      },
     };
 
 const saveState = () =>

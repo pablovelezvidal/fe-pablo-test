@@ -38,6 +38,27 @@ export const allNumbersReducer = (state: any, action: Action) => {
       );
       return newState;
 
+    case C.SET_FEEDBACK_ODD:
+      newState.feedback = {
+        isOddVal: true,
+        isEvenVal: state.feedback.isEvenVal,
+      };
+      return newState;
+
+    case C.SET_FEEDBACK_EVEN:
+      newState.feedback = {
+        isOddVal: state.feedback.isOddVal,
+        isEvenVal: true,
+      };
+      return newState;
+
+    case C.REMOVE_FEEDBACK:
+      newState.feedback = {
+        isOddVal: false,
+        isEvenVal: false,
+      };
+      return newState;
+
     default:
       return state;
   }
