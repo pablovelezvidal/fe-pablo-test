@@ -64,7 +64,7 @@ const MainContent = (props: any) => {
   const classes = useStyles();
 
   const onDragEndFn = (result: any) => {
-    const { destination, source, reason } = result;
+    const { destination, source, reason, draggableId } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
@@ -74,11 +74,11 @@ const MainContent = (props: any) => {
     }
 
     if (destination.droppableId === "all-dp") {
-      props.onAddAll(source.index);
+      props.onAddAll(parseInt(draggableId));
     } else if (destination.droppableId === "even-dp") {
-      props.onAddEven(source.index);
+      props.onAddEven(parseInt(draggableId));
     } else if (destination.droppableId === "odd-dp") {
-      props.onAddOdd(source.index);
+      props.onAddOdd(parseInt(draggableId));
     }
   };
 

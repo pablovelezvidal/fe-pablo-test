@@ -18,15 +18,19 @@ const NumberContainer: any = styled.div`
     props.isDragging ? "lightgreen" : "white"};
 `;
 
-class BoxNumber extends React.Component<{ num: number }, {}> {
+class BoxNumber extends React.Component<{ num: number; index: number }, {}> {
   render() {
     return (
-      <Draggable draggableId={"" + this.props.num} index={this.props.num}>
+      <Draggable
+        draggableId={"" + this.props.num}
+        key={this.props.num}
+        index={this.props.index}
+      >
         {(provided, snapshot) => (
           <NumberContainer
-            ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            ref={provided.innerRef}
             isDragging={snapshot.isDragging}
           >
             {this.props.num}

@@ -27,7 +27,11 @@ class BoxNumbers extends React.Component<any, any> {
               isDraggingOver={snapshot.isDraggingOver}
             >
               {this.props.nums.map((number: any, index: number) => (
-                <BoxNumber key={index + "-" + number} num={number}></BoxNumber>
+                <BoxNumber
+                  key={index + "-" + number}
+                  num={number}
+                  index={index}
+                ></BoxNumber>
               ))}
               {provided.placeholder}
             </BoxNumberDiv>
