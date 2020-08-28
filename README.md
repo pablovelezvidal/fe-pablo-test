@@ -1,4 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Organizing Numbers Test:
+
+**Scaffolded:** Create react app
+
+**Data Source:** small server using express \* see npm run server
+
+**State Management used:** Redux (For such simple state it was used just for fun)
+
+**Side Effects Management:** Redux-Saga (Only used to fetch the data from the server) \*## Check npm run server comand
+
+**Libraries:** Beautiful dnd, styled-components, Material-UI
 
 ## Available Scripts
 
@@ -11,6 +21,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### `npm run server`
+
+Runs the server that provide the array of numbers for the app to work.<br />
+Open [http://localhost:3333/numbers](http://localhost:3333/numbers) to view it in the browser.
 
 ### `npm test`
 
