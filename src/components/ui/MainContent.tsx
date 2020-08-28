@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import BoxNumbersContainer from "./BoxNumbers";
 import { connect } from "react-redux";
+import Typography from "@material-ui/core/Typography";
+
 import {
   addAll,
   addEven,
@@ -35,6 +37,15 @@ const NumbersDiv = styled.div`
   height: auto;
   border: 2px dotted;
   background-color: white;
+`;
+
+const WaterMarkInfo = styled.h2`
+  left: 10%;
+  top: 10%;
+  color: #ddd;
+  opacity: 0.7;
+  z-index: -10;
+  position: absolute;
 `;
 
 const AllNumbersDiv = styled(NumbersDiv)`
@@ -135,12 +146,14 @@ const MainContent = (props: any) => {
             ></BoxNumbersContainer>
           </AllNumbersDiv>
           <EvenNumbersDiv isEven={props.isEvenVal}>
+            <WaterMarkInfo>Drop Even Numbers Here</WaterMarkInfo>
             <BoxNumbersContainer
               nums={props.evenNums}
               id="even-dp"
             ></BoxNumbersContainer>
           </EvenNumbersDiv>
           <OddNumbersDiv isOdd={props.isOddVal}>
+            <WaterMarkInfo>Drop Odd Numbers Here</WaterMarkInfo>
             <BoxNumbersContainer
               nums={props.oddNums}
               id="odd-dp"

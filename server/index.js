@@ -2,8 +2,14 @@ const express = require("express");
 const { port = 3333, delay = 0 } = require("minimist")(process.argv);
 const cors = require("cors");
 
-var randomsNums = () =>
-  [...Array(20)].map(() => Math.floor(Math.random() * 99));
+var randomsNums = () => {
+  let arr = [];
+  while (arr.length < 20) {
+    let r = Math.floor(Math.random() * 100) + 1;
+    if (arr.indexOf(r) === -1) arr.push(r);
+  }
+  return arr;
+};
 
 const app = express()
   .use(cors())
