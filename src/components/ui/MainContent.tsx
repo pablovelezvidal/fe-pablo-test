@@ -63,27 +63,46 @@ interface myState {
 const MainContent = (props: any) => {
   const classes = useStyles();
 
+  const onDragStartFn = (result: any) => {
+    document.body.style.color = "orange";
+  };
+
+  const onDragUpdateFn = (result: any) => {
+    console.log(result);
+    const { draggableId } = result;
+
+    console.log("is odd: ", isOdd(draggableId));
+  };
+
   const onDragEndFn = (result: any) => {
+    document.body.style.color = "inherit";
+
     const { destination, source, reason, draggableId } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
 
-    if (destination.droppableId === source.droppableId) {
+    const isSameDestinationThanSource: boolean =
+      destination.droppableId === source.droppableId;
+    if (isSameDestinationThanSource) {
       return;
     }
 
     if (destination.droppableId === "all-dp") {
       props.onAddAll(parseInt(draggableId));
-    } else if (destination.droppableId === "even-dp") {
+    } else if (destination.droppableId === "even-dp" && !isOdd(draggableId)) {
       props.onAddEven(parseInt(draggableId));
-    } else if (destination.droppableId === "odd-dp") {
+    } else if (destination.droppableId === "odd-dp" && isOdd(draggableId)) {
       props.onAddOdd(parseInt(draggableId));
     }
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEndFn}>
+    <DragDropContext
+      onDragEnd={onDragEndFn}
+      onDragStart={onDragStartFn}
+      onDragUpdate={onDragUpdateFn}
+    >
       <Grid container justify="center">
         <Grid item className={classes.boxesContainer}>
           <AllNumbersDiv>
@@ -109,6 +128,8 @@ const MainContent = (props: any) => {
     </DragDropContext>
   );
 };
+
+const isOdd = (num: number) => num % 2 === 0;
 
 const mapStateToProps = (state: any) => ({
   allNums: state.allNums,
