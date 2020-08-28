@@ -1,11 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
+
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
-import BoxNumbersContainer from "./BoxNumbers";
-import { connect } from "react-redux";
-import Typography from "@material-ui/core/Typography";
 
 import {
   addAll,
@@ -15,7 +15,9 @@ import {
   setFeedbackOdd,
   removeFeedback,
   requestApiData,
-} from "../../actions";
+} from "../actions";
+import BoxNumbersContainer from "../components/ui/BoxNumbers";
+import { myState } from "../store/index";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -63,7 +65,7 @@ const EvenNumbersDiv = styled(NumbersDiv)`
   position: fixed;
   margin: 5px;
   background-color: ${(props: { isEven: boolean }) =>
-    props.isEven ? "red" : "white"};
+    props.isEven ? "#E56B6F" : "white"};
 `;
 const OddNumbersDiv = styled(NumbersDiv)`
   align-self: flex-end;
@@ -74,16 +76,10 @@ const OddNumbersDiv = styled(NumbersDiv)`
   position: fixed;
   margin: 5px;
   background-color: ${(props: { isOdd: boolean }) =>
-    props.isOdd ? "red" : "white"};
+    props.isOdd ? "#E56B6F" : "white"};
 `;
 
-interface myState {
-  allNums: number[];
-  oddNums: number[];
-  evenNums: number[];
-}
-
-const MainContent = (props: any) => {
+const MainContainer = (props: any) => {
   const classes = useStyles();
   const { onRequestApiData } = props;
 
@@ -167,7 +163,7 @@ const MainContent = (props: any) => {
 
 const isOdd = (num: number) => num % 2 === 0;
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: myState) => ({
   allNums: state.allNums,
   evenNums: state.evenNums,
   oddNums: state.oddNums,
@@ -199,4 +195,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

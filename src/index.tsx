@@ -5,18 +5,17 @@ import App from "./App";
 import storeFactory, { sagaMiddleware } from "./store";
 import { Provider } from "react-redux";
 import mySaga from "./sagas";
+import { myState } from "./store/index";
 
-const initialState = localStorage["redux-store"]
-  ? JSON.parse(localStorage["redux-store"])
-  : {
-      allNums: [],
-      oddNums: [],
-      evenNums: [],
-      feedback: {
-        isOddVal: false,
-        isEvenVal: false,
-      },
-    };
+const initialState: myState = {
+  allNums: [],
+  oddNums: [],
+  evenNums: [],
+  feedback: {
+    isOddVal: false,
+    isEvenVal: false,
+  },
+};
 
 const store = storeFactory(initialState);
 sagaMiddleware.run(mySaga);

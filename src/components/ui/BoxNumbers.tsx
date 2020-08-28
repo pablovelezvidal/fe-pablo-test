@@ -16,7 +16,7 @@ const BoxNumberDiv = styled.div`
     props.isDraggingOver ? "skyblue" : "white"};
 `;
 
-class BoxNumbers extends React.Component<any, any> {
+class BoxNumbers extends React.PureComponent<any, any> {
   render() {
     return (
       <>
