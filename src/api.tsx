@@ -1,27 +1,18 @@
 export const fetchData = async () => {
   try {
-    return [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-    ];
+    const response = await fetch(
+      "http://ec2-18-209-100-121.compute-1.amazonaws.com:3333/numbers",
+      {
+        method: "GET",
+        redirect: "follow",
+        headers: {
+          "Content-Type": "application/json",
+          cache: "default",
+        },
+      }
+    );
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.log(error);
   }

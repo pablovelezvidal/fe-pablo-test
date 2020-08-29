@@ -7,14 +7,14 @@ import MyErrorBoundary from "./MyErrorBoundary";
 const BoxNumberDiv = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 99%;
   height: auto;
   min-height: 100px;
   margin: auto;
   transition: background-color 0.2s ease;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 2px -1px rgba(0, 0, 0, 0.3),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   background-color: ${(props: {
     isDraggingOver: boolean;
     id: string;

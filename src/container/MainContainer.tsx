@@ -23,13 +23,8 @@ const NumbersDiv = styled(Grid)`
   z-index: 10;
 `;
 
-const WaterMarkInfo = styled.div`
+const WaterMarkInfo = styled.h3`
   color: #ddd;
-  opacity: 0.6;
-  position: absolute;
-  bottom: 0;
-  margin: 1%;
-  z-index: 0;
 `;
 
 const AllNumbersDiv = styled(NumbersDiv)`
