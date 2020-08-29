@@ -119,7 +119,7 @@ const MainContainer = (props: any) => {
           </AllNumbersDiv>
         </Grid>
         <EvenNumbersDiv>
-          <WaterMarkInfo>Drop Even Here</WaterMarkInfo>
+          <WaterMarkInfo>Drop Odd Here</WaterMarkInfo>
           <BoxNumbersContainer
             nums={props.evenNums}
             id="even-dp"
@@ -127,7 +127,7 @@ const MainContainer = (props: any) => {
           ></BoxNumbersContainer>
         </EvenNumbersDiv>
         <OddNumbersDiv>
-          <WaterMarkInfo>Drop Odd Here</WaterMarkInfo>
+          <WaterMarkInfo>Drop Even Here</WaterMarkInfo>
           <BoxNumbersContainer
             nums={props.oddNums}
             id="odd-dp"
