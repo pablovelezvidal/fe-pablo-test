@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
+import CachedIcon from "@material-ui/icons/Cached";
 
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -14,6 +16,7 @@ import {
   setFeedbackOdd,
   removeFeedback,
   requestApiData,
+  resetNumbers,
 } from "../actions";
 import BoxNumbersContainer from "../components/ui/BoxNumbers";
 import { myState } from "../store/index";
@@ -100,6 +103,14 @@ const MainContainer = (props: any) => {
     >
       <Grid container spacing={1}>
         <Grid item xs={12}>
+          <Fab
+            color="secondary"
+            onClick={() => {
+              props.onResetNumbers();
+            }}
+          >
+            <CachedIcon />
+          </Fab>
           <AllNumbersDiv>
             <BoxNumbersContainer
               nums={props.allNums}
@@ -159,6 +170,9 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
   onRequestApiData() {
     dispatch(requestApiData());
+  },
+  onResetNumbers() {
+    dispatch(resetNumbers());
   },
 });
 

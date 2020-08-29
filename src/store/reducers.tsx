@@ -63,6 +63,16 @@ export const allNumbersReducer = (state: any, action: Action) => {
       newState.allNums = action.payload.data;
       return newState;
 
+    case C.RESET_NUMBERS:
+      newState.allNums = [
+        ...state.allNums,
+        ...state.oddNums,
+        ...state.evenNums,
+      ];
+      newState.evenNums = [];
+      newState.oddNums = [];
+      return newState;
+
     default:
       return state;
   }

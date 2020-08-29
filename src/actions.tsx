@@ -56,3 +56,9 @@ export const receiveApiData = (data: any) => {
     payload: { data },
   };
 };
+
+export const resetNumbers = () => {
+  return {
+    type: C.RESET_NUMBERS,
+  };
+};

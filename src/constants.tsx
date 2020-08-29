@@ -7,6 +7,7 @@ const constants = {
   REMOVE_FEEDBACK: "REMOVE_FEEDBACK",
   REQUEST_API_DATA: "REQUEST_API_DATA",
   RECEIVE_API_DATA: "RECEIVE_API_DATA",
+  RESET_NUMBERS: "RESET_NUMBERS",
 };
 
 export default constants;
